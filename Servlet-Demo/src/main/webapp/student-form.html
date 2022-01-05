@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<!-- This is the head of my HTML File -->
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie-edge" />
+<title>Using Servlets and Forms</title>
+</head>
+
+
+<!-- This is the body of my HTML File -->
+<body>
+	<h1>Requesting information</h1>
+	<hr>
+	<h3>Please enter the data requested:</h3>
+	<form action="StudentServlet" method="GET">
+		First Name:
+		<input type="text" name="firstName" />
+		<br>
+		<br>
+		Last Name:
+		<input type="text" name="lastName" />
+		<br><br>
+		<input type="submit" value="Submit" />
+	</form>
+	<br>
+</body>
+</html>
