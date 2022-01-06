@@ -79,6 +79,9 @@ public class StudentControllerServlet extends HttpServlet {
 			}
 
 		} catch (Exception exc) {
+			// Setting the error message
+			request.setAttribute("ERROR_MESSAGE", "Something went wrong!");
+
 			throw new ServletException(exc);
 		}
 
@@ -92,10 +95,18 @@ public class StudentControllerServlet extends HttpServlet {
 		if (idStudentToDelete != 0) {
 			// Calling the method in charge of deleting the student
 			studentDbUtil.deleteStudent(idStudentToDelete);
+			// Setting the success message
+			request.setAttribute("SUCCESS_MESSAGE", "Student Deleted Sucessfully!");
+
 			// Updating/Charging the list again
 			listStudents(request, response);
 		} else {
 			// Do nothing because the id of the student to delete is 0
+			// Setting the error message
+			request.setAttribute("ERROR_MESSAGE", "Something went wrong!");
+			// Updating/Charging the list again
+			listStudents(request, response);
+
 		}
 
 	}
@@ -112,9 +123,17 @@ public class StudentControllerServlet extends HttpServlet {
 		if (studentToUpdate != null) {
 			// Calling the method to update the student
 			studentDbUtil.updateStudent(studentToUpdate);
+			// Setting the success message
+			request.setAttribute("SUCCESS_MESSAGE", "Student Updated Sucessfully!");
+
 			listStudents(request, response);
 		} else {
 			// Do nothing because the student to update is null
+
+			// Setting the error message
+			request.setAttribute("ERROR_MESSAGE", "Something went wrong!");
+			// Updating/Charging the list again
+			listStudents(request, response);
 		}
 
 	}
@@ -135,6 +154,11 @@ public class StudentControllerServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else {
 			// Do nothing because the student loaded is null
+
+			// Setting the error message
+			request.setAttribute("ERROR_MESSAGE", "Something went wrong!");
+			// Updating/Charging the list again
+			listStudents(request, response);
 		}
 	}
 
@@ -149,6 +173,8 @@ public class StudentControllerServlet extends HttpServlet {
 
 		// Add the student to the data
 		studentDbUtil.addStudent(studentToAdd);
+		// Setting the success message
+		request.setAttribute("SUCCESS_MESSAGE", "Student Added Sucessfully!");
 
 		// Send back to main page (the student list)
 		listStudents(request, response);

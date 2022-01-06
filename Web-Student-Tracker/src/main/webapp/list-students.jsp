@@ -12,9 +12,6 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
 <!-- Importing JQuery -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -159,9 +156,28 @@
 
 					</tbody>
 				</table>
+
+				<!-- Displaying alert if there is a success message -->
+				<c:if test="${not empty SUCCESS_MESSAGE}">
+					<div class="alert alert-success alert-dismissible show" role="alert">
+						<strong>${SUCCESS_MESSAGE}</strong>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				</c:if>
+				<!-- Displaying alert if there is a error message -->
+				<c:if test="${not empty ERROR_MESSAGE}">
+					<div class="alert alert-danger alert-dismissible show" role="alert">
+						<strong>${ERROR_MESSAGE}</strong>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				</c:if>
+
 			</div>
 		</div>
-
 
 	</div>
 	<!-- /container -->
