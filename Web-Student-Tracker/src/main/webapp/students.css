@@ -1,20 +1,42 @@
 @charset "ISO-8859-1";
 
 .colorNavbar {
-	background-color: rgb(163,30,50);
+	background-color: rgb(163, 30, 50);
 	color: white !important;
 }
 
 .navbar-brand {
-	background-color: rgb(163,30,50);
+	background-color: rgb(163, 30, 50);
 	color: white !important;
 }
 
 .active {
-	background-color: red !important;
+	background-color: #a8484d !important;
+}
+
+.active a:hover {
 	color: black !important;
 }
 
-.thead{
+.nonactive  a:hover{
+	color: black !important;	
+}
+
+.colorLink {
+	color: white !important;
+	border-color: white !important;
+	border-width: 1px !important;
+	border-style: solid !important;
+}
+
+.colorLink a:hover {
+	color: black !important;
+}
+
+.thead {
 	background-color: #F5909F;
+}
+
+.linkButton{
+	color: white !important;
 }
