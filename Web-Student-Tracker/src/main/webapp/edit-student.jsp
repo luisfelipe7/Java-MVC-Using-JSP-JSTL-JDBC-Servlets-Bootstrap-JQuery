@@ -76,15 +76,15 @@
 					<input type="hidden" name="id" value="${LOADED_STUDENT.getId()}" />
 					<div class="form-group">
 						<label for=formGroupExampleInput>First Name</label> <input type="text" class="form-control" id="firstName" name="firstName" value="${LOADED_STUDENT.getFirstName()}"
-							placeholder="${LOADED_STUDENT.getFirstName()}">
+							placeholder="${LOADED_STUDENT.getFirstName()}" minlength="3" maxlength="200" required>
 					</div>
 					<div class="form-group">
 						<label for=formGroupExampleInput2>Last Name</label> <input type="text" class="form-control" id="lastName" name="lastName" value="${LOADED_STUDENT.getLastName()}"
-							placeholder="${LOADED_STUDENT.getLastName()}">
+							placeholder="${LOADED_STUDENT.getLastName()}" minlength="3" maxlength="200" required>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Email address</label> <input type="email" class="form-control" id="email" name="email" value="${LOADED_STUDENT.getEmail()}"
-							placeholder="${LOADED_STUDENT.getEmail()}"> <small class="form-text text-muted">We'll never share your email or any information with anyone else outside of the university</small>
+							placeholder="${LOADED_STUDENT.getEmail()}" minlength="7" maxlength="200" required> <small class="form-text text-muted">We'll never share your email or any information with anyone else outside of the university</small>
 					</div>
 					<button type="submit" class="btn btn-primary">Update</button>
 				</form>

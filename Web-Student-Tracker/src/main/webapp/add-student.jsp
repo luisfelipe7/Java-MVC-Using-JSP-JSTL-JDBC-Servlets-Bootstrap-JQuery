@@ -83,15 +83,15 @@
 
 					<div class="form-group">
 						<label for=formGroupExampleInput>First Name</label>
-						<input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name">
+						<input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name" minlength="3" maxlength="200" required>
 					</div>
 					<div class="form-group">
 						<label for=formGroupExampleInput2>Last Name</label>
-						<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter last name">
+						<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter last name" minlength="3" maxlength="200" required>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Email address</label>
-						<input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+						<input type="email" class="form-control" id="email" name="email" placeholder="Enter email"  minlength="7" maxlength="200" required>
 						<small id="email" class="form-text text-muted">We'll never share your email or any information with anyone else outside of the university</small>
 					</div>
 					<button type="submit" value="Save" class="btn btn-success save">Add Student</button>
