@@ -57,21 +57,55 @@ public class StudentControllerServlet extends HttpServlet {
 			// Then base on the value route to the appropriate route, if theCommand is
 			// null/missing the default route is list
 			if (theCommand != null) {
+				if (theCommand.equals("LOAD")) {
+					loadStudent(request, response);
+				} else {
+					if (theCommand.equals("UPDATE")) {
+						updateStudent(request, response);
+					} else {
+						if (theCommand.equals("DELETE")) {
+							deleteStudent(request, response);
+						} else {
+							listStudents(request, response);
+						}
+					}
+				}
+
+			} else {
+				listStudents(request, response);
+			}
+
+		} catch (Exception exc) {
+			// Setting the error message
+			request.setAttribute("ERROR_MESSAGE", "Something went wrong!");
+
+			throw new ServletException(exc);
+		}
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Implementing custom code to update/load the model and send it to the view
+
+		// List the student in MVC
+		try {
+			// Reading the command value to verify which action we need to apply
+			String theCommand = request.getParameter("command");
+			// Then base on the value route to the appropriate route, if theCommand is
+			// null/missing the default route is list
+			if (theCommand != null) {
 				if (theCommand.equals("ADD")) {
 					addStudent(request, response);
 				} else {
-					if (theCommand.equals("LOAD")) {
-						loadStudent(request, response);
+					if (theCommand.equals("SEARCH")) {
+						searchStudent(request, response);
 					} else {
-						if (theCommand.equals("UPDATE")) {
-							updateStudent(request, response);
-						} else {
-							if (theCommand.equals("DELETE")) {
-								deleteStudent(request, response);
-							} else {
-								listStudents(request, response);
-							}
-						}
+						listStudents(request, response);
 					}
 				}
 			} else {
@@ -83,6 +117,43 @@ public class StudentControllerServlet extends HttpServlet {
 			request.setAttribute("ERROR_MESSAGE", "Something went wrong!");
 
 			throw new ServletException(exc);
+		}
+
+	}
+
+	private void searchStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// Capturing the information about the student to search
+		String firstNameToSearch = request.getParameter("searchValue");
+
+		if (firstNameToSearch != null) {
+			if (firstNameToSearch.equals("")) {
+				// Setting the error message
+				request.setAttribute("ERROR_MESSAGE", "Please enter a student to search!");
+				// Updating/Charging the list again
+				listStudents(request, response);
+			} else {
+				// Calling the method in charge of searching the student
+				List<Student> students = studentDbUtil.search(firstNameToSearch);
+
+				// Add students to the request
+				request.setAttribute("STUDENT_LIST", students);
+
+				if (students.isEmpty()) {
+					// Setting the error message
+					request.setAttribute("ERROR_MESSAGE", "No results found with the entered text!");
+				}
+
+				// Send to JSP Page (view)
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
+				dispatcher.forward(request, response);
+			}
+
+		} else {
+			// Do nothing because the id of the student to search is null
+			// Setting the error message
+			request.setAttribute("ERROR_MESSAGE", "Please enter a student to search!");
+			// Updating/Charging the list again
+			listStudents(request, response);
 		}
 
 	}
@@ -177,7 +248,7 @@ public class StudentControllerServlet extends HttpServlet {
 		request.setAttribute("SUCCESS_MESSAGE", "Student Added Sucessfully!");
 
 		// Send back to main page (the student list)
-		listStudents(request, response);
+		response.sendRedirect(request.getContextPath() + "/StudentControllerServlet?command=LIST");
 	}
 
 	private void listStudents(HttpServletRequest request, HttpServletResponse response) throws Exception {

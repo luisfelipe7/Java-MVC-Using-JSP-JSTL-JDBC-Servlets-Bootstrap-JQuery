@@ -77,7 +77,7 @@
 		<div class="row">
 			<div class="col-md-10">
 
-				<form action="StudentControllerServlet" method="GET">
+				<form action="StudentControllerServlet" method="POST">
 					<!-- HIDDEN FIELD TO SAVE IN COMMAND THE ACTION ADD-->
 					<input type="hidden" name="command" value="ADD" />
 

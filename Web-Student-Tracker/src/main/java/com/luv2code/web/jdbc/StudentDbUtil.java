@@ -71,6 +71,48 @@ public class StudentDbUtil {
 
 	}
 
+	public List<Student> search(String firstNameToSearch) throws Exception {
+		// Generating the elements required
+		List<Student> students = new ArrayList<>();
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			// Get a Connection
+			myConn = dataSource.getConnection();
+			// Create a SQL statement
+			String sql = "select * from student where first_name like " + "?";
+			myStmt = myConn.prepareStatement(sql);
+			// Setting the param
+			myStmt.setString(1, "%" + firstNameToSearch + "%");
+			// Execute the query
+			myRs = myStmt.executeQuery();
+			// Process the result set
+			while (myRs.next()) {
+				// Retrieve data from result set row
+				int id = myRs.getInt("id");
+				String firstName = myRs.getString("first_name");
+				String lastName = myRs.getString("last_name");
+				String email = myRs.getString("email");
+
+				// Create new student object
+				Student tempStudent = new Student(id, firstName, lastName, email);
+
+				// Add it to our list of students
+				students.add(tempStudent);
+
+			}
+			return students;
+
+		} finally {
+			// Close JDBC Objects to avoid memory leak
+			close(myConn, myStmt, myRs);
+
+		}
+
+	}
+
 	public void addStudent(Student studentToAdd) throws Exception {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
